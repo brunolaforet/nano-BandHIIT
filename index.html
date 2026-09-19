@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>BandHIIT 7 min Workout ✧ Musculation Élastiques 30s/Repo 10s x 12</title>
+    <meta name="description" content="BandHIIT 7 min, musculation avec élastiques méthode HIIT. Nano App 🪶 100% FREE SANS Pub SANS Cookie • Mode avion ✅ • Code Open Source (MIT) | ">
+    <meta name="theme-color" id="theme-color-meta" content="#8b5cf6">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="BandHIIT 7'">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <meta name="author" content="Bruno LAFORÊT">
+    <meta name="dcterms.rightsHolder" content="Bruno LAFORÊT">
+    <meta name="dcterms.rights" content="MIT License">
+
+    <meta property="og:title" content="BandHIIT 7 min Workout ✧ Musculation Élastiques 30s/Repo 10s x 12">
+    <meta property="og:description" content="BandHIIT 7 min, musculation aux élastibands méthode HIIT. Nano App 🪶 100% FREE SANS Pub SANS Cookie • Mode avion ✅ • Code Open Source (MIT)">
+    <meta property="og:url" content="https://brunolaforet.github.io/nano-flex/">
+    <meta property="og:type" content="website">
+
+
+
+
+    <style>
+        :root { --accent: #8b5cf6; --accent-dark: #6d28d9; --rest-color: #00d9ff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: #1a1a2e; background-image: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('a.svg'); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: auto 80vh; color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
+        h1 { font-size: 4.2rem; font-weight: 900; letter-spacing: 3px; color: var(--accent); margin-bottom: 4px; }
+        .subtitle { font-size: 0.75rem; color: #aaa; letter-spacing: 1px; margin-bottom: 16px; text-align: center; font-weight: normal; }
+        .subtitle-tag { font-size: 0.75rem; color: #aaa; letter-spacing: 1px; font-weight: 700; text-transform: uppercase; text-align: center; margin-bottom: 4px; }
+        .color-pill { display: flex; align-items: center; gap: 7px; background: #16213e; border: 1.5px solid #333; border-radius: 30px; padding: 6px 14px; cursor: pointer; font-size: 0.78rem; color: #ccc; margin-bottom: 20px; }
+        .color-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); }
+
+        .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+        .modal-bg.open { display: flex; }
+        .modal { background: #16213e; border-radius: 20px; padding: 24px; width: 300px; text-align: center; }
+        #wheelCanvas { cursor: crosshair; border-radius: 50%; display: block; margin: 0 auto 14px; touch-action: none; }
+        .preview-swatch { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #fff; margin: 0 auto 18px; }
+        .presets { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 18px; }
+        .preset { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
+        .btn-apply { padding: 9px 26px; background: var(--accent); color: #fff; border: none; border-radius: 30px; font-weight: 700; cursor: pointer; }
+        .btn-cancel { padding: 9px 20px; background: #333; color: #fff; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; margin-right: 8px; }
+
+        main { width: 100%; max-width: 400px; text-align: center; }
+        #workout, #done { display: none; }
+
+        .level-title { font-size: 0.75rem; color: #aaa; letter-spacing: 1px; margin-bottom: 16px; text-align: center; font-weight: normal;}
+        .levels { display: flex; gap: 10px; justify-content: center; margin-bottom: 12px; } /* 2026-09-18 : 28px → 12px, espace repris par .visuals-link */
+        .lvl-btn { padding: 10px; border: 2px solid var(--accent); background: transparent; color: #fff; border-radius: 15px; cursor: pointer; flex: 1; font-size: 0.75rem; transition: background 0.2s; }
+        .lvl-btn.active { background: var(--accent); }
+        .start-btn { padding: 16px 45px; background: var(--accent); color: #fff; border: none; border-radius: 35px; font-size: 1.1rem; font-weight: 800; cursor: pointer; }
+
+        .phase-badge { display: inline-block; padding: 4px 18px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+        .phase-work { background: var(--accent); }
+        .exercise-name { margin-bottom: 15px; min-height: 78px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 0 8px; }
+        .ex-title { font-size: 1.4rem; font-weight: 800; text-transform: uppercase; line-height: 1.15; }
+        .ex-detail { font-size: 0.75rem; font-weight: 500; color: #aaa; letter-spacing: 0.3px; line-height: 1.3; }
+        .ring-wrap { position: relative; width: 155px; height: 155px; margin: 0 auto 20px; }
+        svg.ring { transform: rotate(-90deg); }
+        .ring-bg { fill: none; stroke: #16213e; stroke-width: 12; }
+        .ring-prog { fill: none; stroke-width: 12; stroke-linecap: round; transition: stroke-dashoffset 0.3s linear, stroke 0.3s; }
+        .ring-time { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 3.5rem; font-weight: 800; }
+        .ex-list { display: flex; flex-wrap: nowrap; gap: 4px; justify-content: center; margin-bottom: 25px; width: 100%; }
+        .ex-dot { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #333; font-size: 0.65rem; display: flex; align-items: center; justify-content: center; color: #aaa; flex-shrink: 0; }
+        .ex-dot.done { background: #27ae60; border-color: #27ae60; color: #fff; }
+        .ex-dot.active { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.15); }
+        .controls { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; }
+        .ctrl-btn { padding: 12px 28px; border-radius: 30px; border: none; font-weight: 700; cursor: pointer; color: #fff; font-size: 0.85rem; }
+        .btn-pause { background: #0f3460; }
+        .btn-stop { background: #333; }
+
+    #session-counter {
+    margin: 60px auto;
+    padding: 10px 22px;
+
+
+    /* GARDE LE RESTE POUR LE STYLE DU TEXTE : */
+    display: inline-block;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    animation: popIn 0.5s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+}
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        footer { position: fixed; bottom: 12px; font-size: 0.6rem; color: #aaa; text-align: center; width: 100%; z-index: 10; }
+        footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+        /* 2026-09-18 : lien vers la planche des 12 exercices (Drive), dans #setup donc masqué pendant la séance */
+        .visuals-link { margin-bottom: 20px; }
+        .visuals-link a { display: inline-block; padding: 6px 12px; font-size: 0.85rem; color: var(--accent); text-decoration: none; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <h1>BandHIIT - 7'</h1>
+    <h2 class="subtitle-tag">Musculation avec élastibands</h2>
+    <h3 class="subtitle">30s (à ton rythme) · 10s repos · 12 exercices</h3>
+
+    <div class="color-pill" onclick="openModal()">
+        <div class="color-dot" id="colorDot"></div>
+        Personnaliser la couleur
+    </div>
+
+    <main>
+        <section id="setup">
+            <h3 class="level-title">Choisissez votre niveau</h3>
+            <div class="levels">
+                <h4><button class="lvl-btn active" onclick="setLevel(1,this)">🟢 Débutant<br><small>1 tour</small></button></h4>
+                <h4><button class="lvl-btn" onclick="setLevel(2,this)">🟠 Intermédiaire<br><small>2 tours</small></button></h4>
+                <h4><button class="lvl-btn" onclick="setLevel(3,this)">🔴 Avancé<br><small>3 tours</small></button></h4>
+            </div>
+            <!-- 2026-09-18 : lien (Visuels) vers la planche Drive -->
+            <div class="visuals-link"><a href="https://drive.google.com/file/d/1vQlmHC5qX9ba4lwDBPh9P9t65u7eYlv3/view?usp=sharing" target="_blank" rel="noopener noreferrer">Voir les 12 exercices ↗</a></div>
+            <button class="start-btn" onclick="startWorkout()">▶ COMMENCER</button>
+            <div style="width: 100%; text-align: center; margin-top: 10px;">
+                <div id="session-counter"></div>
+            </div>
+        </section>
+
+        <section id="workout">
+            <div class="subtitle" id="statsHeader">Tour 1 / 1 | Exercice 1 / 12</div>
+            <div class="phase-badge phase-work" id="phaseBadge">TRAVAIL</div>
+            <div class="exercise-name" id="exName"><div class="ex-title">Squat avec tension</div><div class="ex-detail">Sous les pieds, tenu aux épaules 🎯 Quadriceps, fessiers</div></div>
+            <div class="ring-wrap">
+                <svg width="155" height="155" viewBox="0 0 160 160" class="ring">
+                    <circle class="ring-bg" cx="80" cy="80" r="68"/>
+                    <circle class="ring-prog" id="ringProg" cx="80" cy="80" r="68" stroke-dasharray="427.26" stroke-dashoffset="0"/>
+                </svg>
+                <div class="ring-time" id="ringTime">30</div>
+            </div>
+            <div class="ex-list" id="exList"></div>
+            <div class="controls">
+                <button class="ctrl-btn btn-pause" id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
+                <button class="ctrl-btn btn-stop" onclick="stopWorkout()">⏹ Arrêter</button>
+            </div>
+        </section>
+
+        <section id="done">
+            <div style="font-size: 4rem;">🏆</div>
+            <p style="color: #27ae60; margin-bottom: 10px;">Bravo !</p>
+            <p id="doneMsg" style="margin-bottom: 25px; color: #aaa;"></p>
+            <button class="start-btn" onclick="restart()">🔄 Recommencer</button>
+        </section>
+    </main>
+
+    <div class="modal-bg" id="modalBg">
+        <div class="modal">
+            <p>🎨 Choisir une couleur</p>
+            <canvas id="wheelCanvas" width="200" height="200"></canvas>
+            <input type="range" id="lightnessSlider" min="10" max="90" value="50" style="width:100%; margin-bottom:15px;">
+            <div class="preview-swatch" id="previewSwatch"></div>
+            <div class="presets" id="presets"></div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+                <button class="btn-apply" onclick="applyColor()">Appliquer</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Nano App <100Ko • 100% FREE SANS Pub SANS Cookie • <span style="color: #2ecc71;">Mode avion OK</span><br>
+       V2026.08 ✧🤙✧ créée avec ❤️ par <a href="https://www.linkedin.com/in/brunolaforet/" target="_blank">Bruno LAFORÊT</a>
+    </footer>
+
+    <script>
+        const EXERCISES = [
+            { name: "Squat avec tension", band: "Sous les pieds, tenu aux épaules", target: "Quadriceps, fessiers" },
+            { name: "Développé debout", band: "Sous les pieds (ou ancré bas), poussée vers le haut", target: "Épaules" },
+            { name: "Tirage horizontal (Rowing)", band: "Ancré en face (porte) ou sous les pieds assis", target: "Dos (grand dorsal)" },
+            { name: "Pompes avec élastique", band: "Passé dans le dos, bloqué sous les mains", target: "Pectoraux, triceps" },
+            { name: "Soulevé de terre (Deadlift)", band: "Sous les pieds, saisi court mains en pronation", target: "Ischio-jambiers, fessiers" },
+            { name: "Écarté poitrine (Fly)", band: "Ancré derrière soi à hauteur de poitrine", target: "Pectoraux" },
+            { name: "Tirage visage (Face pull)", band: "Ancré en face à hauteur des yeux, tirage aux tempes", target: "Arrière des épaules, haut du dos" },
+            { name: "Fentes alternées", band: "Sous le pied avant, tenu aux épaules", target: "Quadriceps, fessiers" },
+            { name: "Curl biceps", band: "Sous les pieds, tirage vers les épaules", target: "Biceps" },
+            { name: "Extension triceps au-dessus de la tête", band: "Sous les talons (ou ancré bas), poussée vers le haut", target: "Triceps" },
+            { name: "Élévations latérales", band: "Sous un pied, tirage bras tendus sur les côtés", target: "Épaules (faisceau moyen)" },
+            { name: "Woodchopper (Bûcheron)", band: "Ancré en haut, rotation du buste vers le bas", target: "Obliques, sangle abdominale" }
+        ];
+        const PRESETS = ['#8b5cf6','#e67e22','#f1c40f','#2ecc71','#1abc9c','#3498db','#e94560','#e91e8c','#00bcd4','#ff5722'];
+        const CIRCUM = 2 * Math.PI * 68;
+        const COLOR_KEY = 'flex-color';
+        const SESSIONS_KEY = 'flex-sessions';
+
+        let currentAccent = '#8b5cf6', pendingColor = '#8b5cf6';
+        let totalTours = 1, currentTour = 1, exIdx = 0, phase = 'work', timeLeft = 30, paused = false, interval = null;
+        let audioCtx = null, wheelCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        }
+
+        function beep(freq, dur, vol = 0.1) {
+            try {
+                initAudio();
+                const o = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                o.connect(g); g.connect(audioCtx.destination);
+                o.frequency.value = freq;
+                g.gain.setValueAtTime(vol, audioCtx.currentTime);
+                g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+                o.start(); o.stop(audioCtx.currentTime + dur);
+            } catch(e) {}
+        }
+
+        function speak(t) {
+  if (window.speechSynthesis) {
+    const u = new SpeechSynthesisUtterance(t);
+    u.lang = 'fr-FR';
+
+    // 1.15 pour Android (plus lent de base), 1.0 pour Desktop/Linux
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    u.rate = isAndroid ? 1.15 : 1.0;
+
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+  }
+}
+
+        function setLevel(n, btn) {
+            totalTours = n;
+            document.querySelectorAll('.lvl-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function setAccent(hex) {
+            currentAccent = hex;
+            document.documentElement.style.setProperty('--accent', hex);
+            const dot = document.getElementById('colorDot'); if (dot) dot.style.background = hex;
+            const meta = document.getElementById('theme-color-meta'); if (meta) meta.setAttribute('content', hex);
+            const h1 = document.querySelector('h1'); if (h1) h1.style.color = hex;
+        }
+
+        function saveUserColor(hex) {
+            localStorage.setItem(COLOR_KEY, hex);
+            setAccent(hex);
+        }
+
+        function applyColor() {
+            saveUserColor(pendingColor);
+            closeModal();
+        }
+
+        function incrementSessions() {
+            let count = parseInt(localStorage.getItem(SESSIONS_KEY) || '0');
+            localStorage.setItem(SESSIONS_KEY, count + 1);
+            displaySessions();
+        }
+
+        function displaySessions() {
+            const count = localStorage.getItem(SESSIONS_KEY) || '0';
+            const el = document.getElementById('session-counter');
+            if (el && count > 0) {
+                el.style.display = "inline-block";
+                el.innerHTML = `<span>🔥</span> SCORE : ${count} SÉANCE${count > 1 ? 'S' : ''}`;
+            } else if (el) {
+                el.style.display = "none";
+            }
+        }
+
+        function updateUI() {
+            const isWork = phase === 'work';
+            const badge = document.getElementById('phaseBadge');
+            const timerDisplay = document.getElementById('ringTime');
+            const prog = document.getElementById('ringProg');
+
+            document.getElementById('statsHeader').textContent = `Tour ${currentTour} / ${totalTours} | Exercice ${exIdx + 1} / 12`;
+            const ex = EXERCISES[exIdx];
+            document.getElementById('exName').innerHTML = isWork
+                ? `<div class="ex-title">${ex.name}</div><div class="ex-detail">${ex.band} 🎯 ${ex.target}</div>`
+                : '';
+            document.getElementById('ringTime').textContent = timeLeft;
+
+            const activeColor = isWork ? currentAccent : '#00d9ff';
+            badge.style.backgroundColor = activeColor;
+            badge.textContent = isWork ? 'TRAVAIL' : 'REPOS';
+            timerDisplay.style.color = activeColor;
+            prog.style.stroke = activeColor;
+            prog.style.strokeDashoffset = CIRCUM * (1 - timeLeft / (isWork ? 30 : 10));
+
+            const list = document.getElementById('exList');
+            list.innerHTML = '';
+            EXERCISES.forEach((_, i) => {
+                const d = document.createElement('div');
+                d.className = 'ex-dot ' + (i < exIdx ? 'done' : i === exIdx ? 'active' : '');
+                d.textContent = i + 1;
+                list.appendChild(d);
+            });
+        }
+
+        function tick() {
+            if (paused) return;
+            timeLeft--;
+
+            // Bruitages de compte à rebours (3 derniers bips plus aigus)
+            if (timeLeft > 3) beep(600, 0.05, 0.4);
+            else if (timeLeft > 0) beep(880, 0.1, 0.4);
+
+            // ANNONCE DE L'EXERCICE À VENIR (Pendant le repos)
+            // Se déclenche à 7s (soit 3s après le début du repos de 10s)
+            if (phase === 'rest' && timeLeft === 8) {
+                let nextIdx = exIdx + 1;
+                let nextTour = currentTour;
+
+                // Si on arrive au bout des 12 exercices, on prévoit le 1er du tour suivant
+                if (nextIdx > 11) {
+                    nextIdx = 0;
+                    nextTour++;
+                }
+
+                // On annonce uniquement s'il reste un tour à effectuer
+                if (nextTour <= totalTours) {
+                    const next = EXERCISES[nextIdx];
+                    speak("Prochain exercice : " + next.name + ". Élastique : " + next.band);
+                }
+            }
+
+            if (timeLeft <= 0) {
+                if (phase === 'work') {
+                    // Vérification si c'est la fin du dernier exercice du dernier tour
+                    if (exIdx === 11 && currentTour === totalTours) {
+                        finish();
+                        return;
+                    }
+                    phase = 'rest';
+                    timeLeft = 10;
+                    beep(440, 0.5, 0.3);
+                    speak("Repos.");
+                } else {
+                    // Passage à l'exercice suivant après le repos
+                    exIdx++;
+                    if (exIdx > 11) {
+                        exIdx = 0;
+                        currentTour++;
+                    }
+                    phase = 'work';
+                    timeLeft = 30;
+                    beep(660, 0.5, 0.3);
+                    speak(EXERCISES[exIdx].name + ". Élastique : " + EXERCISES[exIdx].band);
+                }
+            }
+            updateUI();
+        }
+
+        function startWorkout() {
+            initAudio();
+            const scoreBadge = document.getElementById('session-counter');
+            if (scoreBadge) scoreBadge.style.display = 'none';
+            document.getElementById('setup').style.display = 'none';
+            document.getElementById('workout').style.display = 'block';
+            exIdx = 0; currentTour = 1; phase = 'work'; timeLeft = 30;
+            updateUI(); beep(660, 0.5); speak(EXERCISES[0].name + ". Élastique : " + EXERCISES[0].band);
+            interval = setInterval(tick, 1000);
+        }
+
+        function togglePause() {
+            paused = !paused;
+            document.getElementById('pauseBtn').textContent = paused ? '▶ Reprendre' : '⏸ Pause';
+        }
+
+        function stopWorkout() { clearInterval(interval); restart(); }
+
+        function finish() {
+            clearInterval(interval);
+            incrementSessions();
+            document.getElementById('doneMsg').textContent =
+                `${totalTours} tour${totalTours > 1 ? 's' : ''} · 12 exercices · ${totalTours * 7} min`;
+            document.getElementById('workout').style.display = 'none';
+            document.getElementById('done').style.display = 'block';
+            const scoreBadge = document.getElementById('session-counter');
+            if (scoreBadge) scoreBadge.style.display = 'none';
+            beep(880, 0.8);
+            speak("Bravo, séance terminée");
+        }
+
+        function restart() {
+            document.getElementById('done').style.display = 'none';
+            document.getElementById('workout').style.display = 'none';
+            document.getElementById('setup').style.display = 'block';
+            displaySessions();
+        }
+
+        function openModal() { document.getElementById('modalBg').classList.add('open'); drawWheel(parseInt(document.getElementById('lightnessSlider').value)); }
+        function closeModal() { document.getElementById('modalBg').classList.remove('open'); }
+
+        function drawWheel(l) {
+            const size = 200, cx = 100, cy = 100, r = 98;
+            wheelCtx.clearRect(0,0,size,size);
+            for (let a=0; a<360; a++) {
+                const grad = wheelCtx.createRadialGradient(cx,cy,0,cx,cy,r);
+                grad.addColorStop(0, `hsl(${a},0%,${l}%)`); grad.addColorStop(1, `hsl(${a},100%,${l}%)`);
+                wheelCtx.beginPath(); wheelCtx.moveTo(cx,cy); wheelCtx.arc(cx,cy,r,(a-1)*Math.PI/180,(a+1)*Math.PI/180);
+                wheelCtx.fillStyle = grad; wheelCtx.fill();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            wheelCtx = document.getElementById('wheelCanvas').getContext('2d');
+            const savedColor = localStorage.getItem(COLOR_KEY);
+            if (savedColor) setAccent(savedColor);
+            displaySessions();
+            document.getElementById('lightnessSlider').addEventListener('input', (e) => drawWheel(parseInt(e.target.value)));
+            document.getElementById('wheelCanvas').addEventListener('pointerdown', (e) => {
+                const rect = e.target.getBoundingClientRect();
+                const px = wheelCtx.getImageData(e.clientX - rect.left, e.clientY - rect.top, 1, 1).data;
+                if (px[3] > 0) {
+                    pendingColor = '#' + [px[0],px[1],px[2]].map(v => v.toString(16).padStart(2,'0')).join('');
+                    document.getElementById('previewSwatch').style.background = pendingColor;
+                }
+            });
+            const pWrap = document.getElementById('presets');
+            PRESETS.forEach(c => {
+                const d = document.createElement('div'); d.className = 'preset'; d.style.background = c;
+                d.onclick = () => { pendingColor = c; document.getElementById('previewSwatch').style.background = c; };
+                pWrap.appendChild(d);
+            });
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/nano-flex/sw.js').catch(err => console.log('SW Error', err));
+            }
+        });
+    </script>
+</body>
+</html>
+<!-- Test Signature SSH -->

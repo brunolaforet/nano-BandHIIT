@@ -1,0 +1,17 @@
+{
+  "short_name": "BandHIIT 7min",
+  "name": "BandHIIT 7 Min Workout - Musculation avec Élastiques",
+  "description": "Musculation avec Élastiques, méthode HIIT, ultra-légère et autonome.",
+  "icons": [
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ],
+  "start_url": "/nano-BandHIIT/index.html",
+  "scope": "/nano-BandHIIT/",
+  "background_color": "#1a1a2e",
+  "theme_color": "#8b5cf6",
+  "display": "standalone",
+  "orientation": "portrait"
+
+}
