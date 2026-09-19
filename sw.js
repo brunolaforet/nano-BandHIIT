@@ -1,11 +1,11 @@
-const CACHE_NAME = 'BandHIIT';
+const CACHE_NAME = 'BandHIIT ++';
 const ASSETS = [
   '/nano-BandHIIT/',
   '/nano-BandHIIT/index.html',
   '/nano-BandHIIT/manifest.json',
   '/nano-BandHIIT/icon-192.png',
   '/nano-BandHIIT/icon-512.png',
-  '/nano-BandHIIT/a.svg'
+  '/nano-BandHIIT/BandHIIT.svg'
 ];
 
 // Installation : mise en cache + skipWaiting chaîné correctement
