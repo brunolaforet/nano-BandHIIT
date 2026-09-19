@@ -1,12 +1,12 @@
-// À incrémenter à chaque déploiement (bandhiit-v1.1, v1.2…) pour que les mises à jour arrivent chez les utilisateurs
-const CACHE_NAME = 'bandhiit-v1.0';
+// À incrémenter à chaque déploiement (bandhiit-v1.2, v1.3…) pour que les mises à jour arrivent chez les utilisateurs
+const CACHE_NAME = 'bandhiit-v1.1';
 const CACHE_PREFIX = 'bandhiit-';
 const ASSETS = [
   '/nano-BandHIIT/',
   '/nano-BandHIIT/index.html',
   '/nano-BandHIIT/manifest.json',
-  '/nano-BandHIIT/icon-192.jpg',
-  '/nano-BandHIIT/icon-512.jpg',
+  '/nano-BandHIIT/icon-192.png',
+  '/nano-BandHIIT/icon-512.png',
   '/nano-BandHIIT/BandHIIT.svg'
 ];
 
