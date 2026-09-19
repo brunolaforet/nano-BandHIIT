@@ -1,4 +1,6 @@
-const CACHE_NAME = 'BandHIIT ++';
+// À incrémenter à chaque déploiement (bandhiit-v1.1, v1.2…) pour que les mises à jour arrivent chez les utilisateurs
+const CACHE_NAME = 'bandhiit-v1.0';
+const CACHE_PREFIX = 'bandhiit-';
 const ASSETS = [
   '/nano-BandHIIT/',
   '/nano-BandHIIT/index.html',
@@ -19,22 +21,28 @@ self.addEventListener('install', (e) => {
   );
 });
 
-// Activation : nettoyage des anciennes versions
+// Activation : nettoyage des anciennes versions de CETTE appli uniquement
+// (les autres PWA de brunolaforet.github.io partagent la même origine, on ne touche pas à leurs caches)
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then(keys => Promise.all(
-      keys.map(key => key !== CACHE_NAME ? caches.delete(key) : null)
+      keys
+        .filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
+        .map(key => caches.delete(key))
     )).then(() => self.clients.claim())
   );
 });
 
 // Stratégie : CACHE-FIRST (priorité absolue au local pour la vitesse)
+// On interroge uniquement le cache de cette appli, pas tous les caches de l'origine
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then(res => {
-      return res || fetch(e.request).catch(() => {
-        if (e.request.mode === 'navigate') return caches.match('/nano-BandHIIT/index.html');
-      });
-    })
+    caches.open(CACHE_NAME)
+      .then(cache => cache.match(e.request, { ignoreSearch: true }))
+      .then(res => {
+        return res || fetch(e.request).catch(() => {
+          if (e.request.mode === 'navigate') return caches.match('/nano-BandHIIT/index.html');
+        });
+      })
   );
 });
