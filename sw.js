@@ -5,8 +5,8 @@ const ASSETS = [
   '/nano-BandHIIT/',
   '/nano-BandHIIT/index.html',
   '/nano-BandHIIT/manifest.json',
-  '/nano-BandHIIT/icon-192.png',
-  '/nano-BandHIIT/icon-512.png',
+  '/nano-BandHIIT/icon-192.jpg',
+  '/nano-BandHIIT/icon-512.jpg',
   '/nano-BandHIIT/BandHIIT.svg'
 ];
 
