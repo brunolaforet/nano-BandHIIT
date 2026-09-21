@@ -27,9 +27,9 @@ Inspiré du célèbre *7-Minute Workout* (publié par l'American College of Spor
 * **Montée en puissance (15 kg, 20 kg, 25 kg...) :** Une fois la gestuelle bien maîtrisée et le cycle de 7 minutes enchaîné sans perte de forme, augmentez progressivement la résistance pour continuer à stimuler le renforcement.
 * **Pack idéal (3 élastiques) :**
 Avec seulement 10 s de repos, prépare tout à l'avance :
-10 kg accroché en haut d'une porte.
-10 kg libre à portée de main.
-20 kg pour les grands groupes musculaires (cuisses, fessiers, dos).
+* 10 kg accroché en haut d'une porte.
+* 10 kg libre à portée de main.
+* 20 kg pour les grands groupes musculaires (cuisses, fessiers, dos).
 
 
 
