@@ -31,7 +31,11 @@ Avec seulement 10 s de repos, prépare tout à l'avance :
 * 10 kg libre à portée de main.
 * 20 kg pour les grands groupes musculaires (cuisses, fessiers, dos).
 
-
+* **Pack idéal :**
+* Avec seulement 10 s de repos, prépare tout à l'avance :
+    * **10 kg** accroché en haut d'une porte.
+    * **10 kg** libre à portée de main.
+    * **20 kg** pour les grands groupes musculaires (cuisses, fessiers, dos).
 
 
 ---
